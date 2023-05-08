@@ -67,6 +67,7 @@ class Config(metaclass=Singleton):
             "BROWSE_SPACY_LANGUAGE_MODEL", "en_core_web_sm"
         )
 
+        self.openai_api_base = os.getenv("OPENAI_API_BASE")
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.openai_organization = os.getenv("OPENAI_ORGANIZATION")
         self.temperature = float(os.getenv("TEMPERATURE", "0"))
@@ -77,6 +78,9 @@ class Config(metaclass=Singleton):
         self.restrict_to_workspace = (
             os.getenv("RESTRICT_TO_WORKSPACE", "True") == "True"
         )
+
+        if self.openai_api_base != None:
+            openai.api_base = self.openai_api_base
 
         if self.use_azure:
             self.load_azure_config()
