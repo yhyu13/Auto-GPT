@@ -79,7 +79,7 @@ class Config(metaclass=Singleton):
             os.getenv("RESTRICT_TO_WORKSPACE", "True") == "True"
         )
 
-        if self.openai_api_base != None:
+        if self.openai_api_base != None and self.openai_api_base != '':
             openai.api_base = self.openai_api_base
 
         if self.use_azure:
